@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(@Inject('USER_SERVICE') private client: ClientProxy) {}
+
+  async findOneByEmail(email: string) {
+    const pattern = { cmd: 'findOneByEmail' };
+    const payload = email;
+    const { id: userId } = await firstValueFrom<{ id: string }>(
+      this.client.send<{ id: string }>(pattern, payload),
+    );
+    return userId;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async create(email: string, password: string) {
+    const pattern = { cmd: 'create' };
+    const payload = { email, password };
+    const { id: userId } = await firstValueFrom<{ id: string }>(
+      this.client.send<{ id: string }>(pattern, payload),
+    );
+    return userId;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  // TODO
+  async validateUser(email: string, password) {
+    return '';
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  // TODO
+  async checkUserIsAdmin(id: string) {
+    return true;
   }
 }

@@ -12,7 +12,7 @@ import {
   import { Observable } from 'rxjs';
   import { IS_PUBLIC_KEY } from '../common/decorator/public.decorator';
   import { ROLES_KEY } from '../common/decorator/role.decorator';
-  import { Role } from '../user/enum/user.enum';
+  import { Role } from 'src/user/enum/user.enum';
   import { UserService } from '../user/user.service';
   
   @Injectable()
