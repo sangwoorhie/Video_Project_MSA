@@ -1,5 +1,12 @@
 # Video Project - Microservice Architecture
 
+```bash
+$ npm i
+$ cd apps / cd analytics -> npm i
+$ cd apps / cd api-gateway -> npm i
+$ cd apps / cd user -> npm i
+$ cd apps / cd video -> npm i
+```
 
 ## 프로젝트 아키텍쳐
 
@@ -24,16 +31,51 @@
 - 완전히 분리된 환경에서 각각의 마이크로서비스를 띄울 수 있음
 
 ```bash
-$ npm i
-$ cd apps / cd analytics -> npm i
-$ cd apps / cd api-gateway -> npm i
-$ cd apps / cd user -> npm i
-$ cd apps / cd video -> npm i
+$ cd apps / cd api-gateway -> docker build -t api-gateway .
+$ docker run -p 3000:3000 --name api-gateway api-gateway
 ```
 
+## Docker Compose
+
+- 여러 마이크로서비스 도커 컨테이너를 로컬에서 관리하는 것이 가능
+
+### 마이크로서비스들 컨테이너로 실행
+
+- docker-compose.yml
+
 ```bash
-$ docker build -t api-gateway .
-$ docker run -p 3000:3000 --name api-gateway api-gateway
+$ npm run microservice
+```
+
+### Postgres
+
+- postgres.yml
+
+```bash
+$ npm run postgres
+```
+
+- 유저, DB 생성
+
+```bash
+# 도커 컨테이너의 bash 실행
+$ docker exec -it postgres /bin/bash
+
+# 유저 생성
+$ createuser -d -P -U postgres -h localhost -p 5432 api-gateway
+$ createuser -d -P -U postgres -h localhost -p 5432 user-service
+$ createuser -d -P -U postgres -h localhost -p 5432 video-service
+$ createuser -d -P -U postgres -h localhost -p 5432 analytics-service
+# Enter password for new role: 생성할 유저의 비번 입력
+# Enter it again: 생성할 유저의 비번 입력
+# Password: 마스터 계정의 비번 입력
+
+# DB 생성
+$ createdb -U api-gateway -h localhost -p 5432 -E UTF8 api-gateway
+$ createdb -U user-service -h localhost -p 5432 -E UTF8 user-service
+$ createdb -U video-service -h localhost -p 5432 -E UTF8 video-service
+$ createdb -U analytics-service -h localhost -p 5432 -E UTF8 analytics-service
+# Password: 해당 유저의 비번 입력
 ```
 
 ## 기술 스택
