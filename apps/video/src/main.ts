@@ -16,4 +16,5 @@ async function bootstrap() {
   await app.listen();
   console.info(`video-service listening on 3002 for TCP`);
 }
+
 bootstrap();

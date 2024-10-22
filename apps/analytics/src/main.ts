@@ -17,4 +17,5 @@ async function bootstrap() {
   app.listen();
   console.info(`analytics-service listening`);
 }
+
 bootstrap();
