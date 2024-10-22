@@ -20,6 +20,7 @@ import { UserAfterAuth } from '../common/decorator/user.decorator';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  // 1. 회원가입
   @ApiPostResponse(SignupResDto)
   @Public()
   @Post('signup')
@@ -34,6 +35,7 @@ export class AuthController {
     return { id, accessToken, refreshToken };
   }
 
+  // 2. 로그인
   @ApiPostResponse(SigninResDto)
   @Public()
   @Post('signin')
@@ -41,6 +43,7 @@ export class AuthController {
     return this.authService.signin(email, password);
   }
 
+  // 3. 리프레시토큰 발급
   @ApiPostResponse(RefreshResDto)
   @ApiBearerAuth()
   @Post('refresh')

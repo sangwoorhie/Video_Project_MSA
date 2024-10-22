@@ -15,6 +15,7 @@ export class AuthService {
     private refreshTokenRepository: Repository<RefreshToken>,
   ) {}
 
+  // 1. 회원가입
   async signup(email: string, password: string) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
@@ -45,6 +46,7 @@ export class AuthService {
     }
   }
 
+  // 2. 로그인
   async signin(email: string, password: string) {
     const userId = await this.userService.validateUser(email, password);
 
@@ -56,6 +58,7 @@ export class AuthService {
     };
   }
 
+  // 3. 리프레시토큰 발급
   async refresh(token: string, userId: string) {
     const refreshTokenEntity = await this.refreshTokenRepository.findOneBy({
       token,

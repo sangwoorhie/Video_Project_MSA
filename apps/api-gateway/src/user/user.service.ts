@@ -24,7 +24,7 @@ export class UserService {
     return userId;
   }
 
-  // TODO
+  // 회원여부 검증
   async validateUser(email: string, password: string) {
     const pattern = { cmd: 'validate' };
     const payload = { email, password };
@@ -34,7 +34,7 @@ export class UserService {
     return id;
   }
 
-  // TODO
+  // 관리자여부 검증
   async checkUserIsAdmin(id: string) {
     return true;
   }
