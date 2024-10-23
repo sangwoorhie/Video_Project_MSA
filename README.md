@@ -1,5 +1,6 @@
 # Video Project - Microservice Architecture
 
+- 종속성 설치
 ```bash
 $ npm i
 $ cd apps / cd analytics -> npm i
@@ -53,6 +54,15 @@ $ npm run microservice
 
 ```bash
 $ npm run postgres
+```
+
+### Kafka
+
+- 메시지 브로커
+- 도커 컴포즈로 실행
+
+```bash
+$ npm run kafka
 ```
 
 - 유저, DB 생성
