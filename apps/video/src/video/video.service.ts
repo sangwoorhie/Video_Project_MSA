@@ -14,6 +14,7 @@ export class VideoService {
     @Inject('VIDEO_SERVICE') private client: ClientProxy,
   ) {}
 
+  // 1. 비디오 업로드 로직 처리
   async upload(
     userId: string,
     title: string,
@@ -25,9 +26,11 @@ export class VideoService {
     await queryRunner.startTransaction();
     let error;
     try {
+      // 비디오 메타데이터 DB 저장
       const video = await queryRunner.manager.save(
         queryRunner.manager.create(Video, { title, mimetype, userId }),
       );
+      // 비디오 파일 로컬에 저장
       await this.uploadVideo(video.id, extension, buffer);
       await queryRunner.commitTransaction();
       return video;
@@ -40,6 +43,7 @@ export class VideoService {
     }
   }
 
+  // 2. 비디오 다운로드 로직 처리
   async download(
     id: string,
   ): Promise<{ buffer: Buffer; mimetype: string; size: number }> {
@@ -56,11 +60,13 @@ export class VideoService {
     const { size } = await stat(videoPath);
     const buffer = await readFile(videoPath);
 
+    // 비동기 이벤트 발행 (Kafka 사용)
     this.client.emit('video_downloaded', { id: video.id });
 
     return { buffer, mimetype, size };
   }
 
+  // 비디오 파일 저장 메서드
   private async uploadVideo(id: string, extension: string, buffer: Buffer) {
     const filePath = join(process.cwd(), 'video-storage', `${id}.${extension}`);
     await writeFile(filePath, Buffer.from(buffer));

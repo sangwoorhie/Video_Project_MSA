@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
   } from 'typeorm';
   
+  // RefreshToken 엔티티 (리프레시 토큰 저장용)
   @Entity()
   export class RefreshToken {
     @PrimaryGeneratedColumn('uuid')

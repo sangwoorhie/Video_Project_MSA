@@ -13,6 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  // JWT 토큰의 유효성 검증 및 사용자 정보 추출
   async validate(payload: any) {
     return { id: payload.sub };
   }

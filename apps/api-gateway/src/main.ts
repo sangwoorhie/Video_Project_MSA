@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+// API Gateway 설정 및 Swagger 설정 (Main main.ts)
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 

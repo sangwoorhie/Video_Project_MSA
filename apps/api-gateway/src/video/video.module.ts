@@ -10,7 +10,7 @@ import { VideoController } from './video.controller';
       provide: 'VIDEO_SERVICE',
       useFactory: () => {
         return ClientProxyFactory.create({
-          transport: Transport.TCP,
+          transport: Transport.TCP, // TCP transporter를 사용하여 동기 통신 구현
           options: {
             host: 'video-service',
             port: 3002,

@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
-      transport: Transport.TCP,
+      transport: Transport.TCP, // TCP transporter를 사용하여 동기 통신 구현
       options: {
         host: 'video-service',
         port: 3002,

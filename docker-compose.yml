@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # api-gateway service
   api-gateway:
     image: api-gateway
     build:
@@ -22,6 +23,7 @@ services:
       - POSTGRES_HOST=host.docker.internal
     restart: "no"
 
+  # user service
   user-service:
     image: user-service
     build:
@@ -37,6 +39,7 @@ services:
       - POSTGRES_HOST=host.docker.internal
     restart: "no"
 
+  # video service
   video-service:
     image: video-service
     build:
@@ -52,6 +55,7 @@ services:
       - POSTGRES_HOST=host.docker.internal
     restart: "no"
     
+  # analytics service
   analytics-service:
     image: analytics-service
     build:

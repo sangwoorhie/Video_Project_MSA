@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
   } from 'typeorm';
   
+  // Analytics 엔티티 (다운로드 수 등 통계 데이터를 저장)
   @Entity()
   export class Analytics {
     @PrimaryGeneratedColumn('uuid')

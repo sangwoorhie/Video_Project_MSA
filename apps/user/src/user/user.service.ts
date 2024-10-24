@@ -10,13 +10,13 @@ export class UserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  // 이메일로 유저 찾기
+  // 1. 이메일로 사용자 조회
   async findOneByEmail(email: string) {
     const user = await this.userRepository.findOneBy({ email });
     return user;
   }
 
-  // 유저 생성
+  // 2. 사용자 생성
   async create(email: string, password: string) {
     const saltRounds = 10;
     const hash = await bcrypt.hash(password, saltRounds);
@@ -28,7 +28,7 @@ export class UserService {
     return user;
   }
 
-  // 유저 유효성 검사
+  // 3. 사용자 인증
   async validate(email: string, password: string) {
     const user = await this.findOneByEmail(email);
     if (!user) throw new UnauthorizedException();

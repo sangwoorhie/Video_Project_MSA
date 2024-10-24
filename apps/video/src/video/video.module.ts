@@ -11,7 +11,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ClientsModule.register([
       {
         name: 'VIDEO_SERVICE',
-        transport: Transport.KAFKA,
+        transport: Transport.KAFKA, // Kafka transporter를 사용하여 비동기 통신 구현
         options: {
           client: {
             clientId: 'video',

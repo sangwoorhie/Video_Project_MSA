@@ -39,6 +39,8 @@ import { VideoService } from './video.service';
 export class VideoController {
   constructor(private videoService: VideoService) {}
 
+  // 1. 비디오 업로드 (동기 통신, TCP 사용)
+  // POST : localhost:3000/api/videos
   @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiPostResponse(CreateVideoResDto)
@@ -74,6 +76,8 @@ export class VideoController {
     return { id, title };
   }
 
+  // 2. 비디오 다운로드 엔드포인트 (동기 통신, TCP 사용)
+  // GET : localhost:3000/api/videos/:id/download
   @ApiBearerAuth()
   @Get(':id/download')
   async download(

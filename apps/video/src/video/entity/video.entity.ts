@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+// Video 엔티티 (비디오 메타데이터 저장)
 @Entity()
 export class Video {
   @PrimaryGeneratedColumn('uuid')

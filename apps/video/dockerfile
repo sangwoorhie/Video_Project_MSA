@@ -1,15 +1,19 @@
 FROM node:18.14.2
 
+# Video 서비스의 Docker 이미지 생성 설정
+
 WORKDIR /usr/src/app
 
 RUN mkdir video-storage
 RUN npm install -g @nestjs/cli
 
+# 애플리케이션 의존성 복사
 # Copy application dependency manifests to the container image.
 # Copying this first prevents re-running npm install on every code change.
 COPY package*.json ./
 
 COPY . .
 
+# 애플리케이션 실행 명령어
 CMD npm install && \
   nest start --watch

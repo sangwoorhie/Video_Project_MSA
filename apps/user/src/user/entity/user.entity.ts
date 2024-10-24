@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Role } from './user.enum';
 
+// User 엔티티 (사용자 정보 저장)
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')

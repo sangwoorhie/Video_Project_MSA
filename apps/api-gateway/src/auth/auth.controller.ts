@@ -20,7 +20,8 @@ import { UserAfterAuth } from '../common/decorator/user.decorator';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  // 1. 회원가입
+  // 1. 회원가입 엔드포인트
+  // POST : localhost:3000/api/auth/signup
   @ApiPostResponse(SignupResDto)
   @Public()
   @Post('signup')
@@ -35,7 +36,8 @@ export class AuthController {
     return { id, accessToken, refreshToken };
   }
 
-  // 2. 로그인
+  // 2. 로그인 엔드포인트
+  // POST : localhost:3000/api/auth/signin
   @ApiPostResponse(SigninResDto)
   @Public()
   @Post('signin')
@@ -44,6 +46,7 @@ export class AuthController {
   }
 
   // 3. 리프레시토큰 발급
+  // POST : localhost:3000/api/auth/refresh
   @ApiPostResponse(RefreshResDto)
   @ApiBearerAuth()
   @Post('refresh')

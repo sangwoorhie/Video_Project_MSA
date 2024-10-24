@@ -26,6 +26,7 @@ import {
       super();
     }
   
+    // 요청에 대한 인증 및 권한 검사
     canActivate(
       context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
@@ -60,6 +61,7 @@ import {
       ]);
       if (requiredRoles) {
         const userId = decoded['sub'];
+         // 관리자 권한 확인 (동기 통신, TCP 사용)
         return this.userService.checkUserIsAdmin(userId);
       }
   
